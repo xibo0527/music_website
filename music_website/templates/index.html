@@ -1,21 +1,22 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en" class="app">
 <head>  
   <meta charset="utf-8" />
   <title>Musik | Web Application</title>
   <meta name="description" content="app, web app, responsive, admin dashboard, admin, flat, flat ui, ui kit, off screen nav" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <link rel="stylesheet" href="/static/test01/js/jPlayer/jplayer.flat.css" type="text/css" />
-  <link rel="stylesheet" href="/static/test01/css/bootstrap.css" type="text/css" />
-  <link rel="stylesheet" href="/static/test01/css/animate.css" type="text/css" />
-  <link rel="stylesheet" href="/static/test01/css/font-awesome.min.css" type="text/css" />
-  <link rel="stylesheet" href="/static/test01/css/simple-line-icons.css" type="text/css" />
-  <link rel="stylesheet" href="/static/test01/css/font.css" type="text/css" />
-  <link rel="stylesheet" href="/static/test01/css/app.css" type="text/css" />
+  <link rel="stylesheet" href="{% static 'js/jPlayer/jplayer.flat.css' %}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'css/animate.css' %}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'css/simple-line-icons.css' %}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'css/font.css' %}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'css/app.css' %}" type="text/css" />
     <!--[if lt IE 9]>
-    <script src="/static/test01/js/ie/html5shiv.js"></script>
-    <script src="/static/test01/js/ie/respond.min.js"></script>
-    <script src="/static/test01/js/ie/excanvas.js"></script>
+    <script src="{% static 'js/ie/html5shiv.js' %}"></script>
+    <script src="{% static 'js/ie/respond.min.js' %}"></script>
+    <script src="{% static 'js/ie/excanvas.js' %}"></script>
   <![endif]-->
 </head>
 <body class="">
@@ -25,9 +26,9 @@
         <a class="btn btn-link visible-xs" data-toggle="class:nav-off-screen,open" data-target="#nav,html">
           <i class="icon-list"></i>
         </a>
-        <a href="index.html" class="navbar-brand text-lt">
+        <a href="{% url 'repo:index' %}" class="navbar-brand text-lt">
           <i class="icon-earphones"></i>
-          <img src="/static/test01/images/logo.png" alt="." class="hide">
+          <img src="{% static 'images/logo.png' %}" alt="." class="hide">
           <span class="hidden-nav-xs m-l-sm">Musik</span>
         </a>
         <a class="btn btn-link visible-xs" data-toggle="dropdown" data-target=".user">
@@ -56,7 +57,7 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle bg clear" data-toggle="dropdown">
               <span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm">
-                <img src="/static/test01/images/a0.png" alt="...">
+                <img src="{% static 'images/a0.png' %}" alt="...">
               </span>
               John.Smith <b class="caret"></b>
             </a>
@@ -93,23 +94,20 @@
           <section class="vbox">
             <section class="w-f-md scrollable">
               <div class="slim-scroll" data-height="auto" data-disable-fade-out="true" data-distance="0" data-size="10px" data-railOpacity="0.2">
-                
-
-
-                <!-- nav -->                 
+                  <!-- nav -->
                 <nav class="nav-primary hidden-xs">
                   <ul class="nav bg clearfix">
                     <li class="hidden-nav-xs padder m-t m-b-sm text-xs text-muted">
                       Discover
                     </li>
                     <li>
-                      <a href="index.html">
+                      <a href="{% url 'repo:index' %}">
                         <i class="icon-disc icon text-success"></i>
                         <span class="font-bold">首页</span>
                       </a>
                     </li>
                     <li>
-                      <a href="genres.html">
+                      <a href="{% url 'genres:genres' %}">
                         <i class="icon-music-tone-alt icon text-info"></i>
                         <span class="font-bold">流派</span>
                       </a>
@@ -165,7 +163,7 @@
                               </a>
                             </div>
                           </div>
-                          <a href="#"><img src="/static/test01/images/p1.jpg" alt="" class="r r-2x img-full"></a>
+                          <a href="#"><img src="{% static 'images/p1.jpg' %}" alt="" class="r r-2x img-full"></a>
                         </div>
                         <div class="padder-v">
                           <a href="#" class="text-ellipsis">Tempered Song</a>
@@ -194,7 +192,7 @@
                               </a>
                             </div>
                           </div>
-                          <a href="#"><img src="/static/test01/images/p2.jpg" alt="" class="r r-2x img-full"></a>
+                          <a href="#"><img src="{% static 'images/p2.jpg' %}" alt="" class="r r-2x img-full"></a>
                         </div>
                         <div class="padder-v">
                           <a href="#" class="text-ellipsis">Vivamus vel tincidunt libero</a>
@@ -219,7 +217,7 @@
                               </a>
                             </div>
                           </div>
-                          <a href="#"><img src="/static/test01/images/p3.jpg" alt="" class="r r-2x img-full"></a>
+                          <a href="#"><img src="{% static 'images/p3.jpg' %}" alt="" class="r r-2x img-full"></a>
                         </div>
                         <div class="padder-v">
                           <a href="#" class="text-ellipsis">Morbi id neque quam liquam sollicitudin</a>
@@ -248,7 +246,7 @@
 <!--                              <i class="fa fa-bookmark i-lg"></i>-->
                             </span>
                           </div>
-                          <a href="#"><img src="/static/test01/images/p4.jpg" alt="" class="r r-2x img-full"></a>
+                          <a href="#"><img src="{% static 'images/p4.jpg' %}" alt="" class="r r-2x img-full"></a>
                         </div>
                         <div class="padder-v">
                           <a href="#" class="text-ellipsis">Tincidunt libero</a>
@@ -273,7 +271,7 @@
                               </a>
                             </div>
                           </div>
-                          <a href="#"><img src="/static/test01/images/p5.jpg" alt="" class="r r-2x img-full"></a>
+                          <a href="#"><img src="{% static 'images/p5.jpg' %}" alt="" class="r r-2x img-full"></a>
                         </div>
                         <div class="padder-v">
                           <a href="#" class="text-ellipsis">Fermentum diam</a>
@@ -299,7 +297,7 @@
                               </a>
                             </div>
                           </div>                          
-                          <a href="#"><img src="/static/test01/images/p6.jpg" alt="" class="r r-2x img-full"></a>
+                          <a href="#"><img src="{% static 'images/p6.jpg' %}" alt="" class="r r-2x img-full"></a>
                         </div>
                         <div class="padder-v">
                           <a href="#" class="text-ellipsis">Habitant</a>
@@ -326,7 +324,7 @@
                           </div>
                           <div class="top">
                           </div>
-                          <a href="#"><img src="/static/test01/images/p7.jpg" alt="" class="r r-2x img-full"></a>
+                          <a href="#"><img src="{% static 'images/p7.jpg' %}" alt="" class="r r-2x img-full"></a>
                         </div>
                         <div class="padder-v">
                           <a href="#" class="text-ellipsis">Vivamus vel tincidunt libero</a>
@@ -350,7 +348,7 @@
                               </a>
                             </div>
                           </div>
-                          <a href="#"><img src="/static/test01/images/p8.jpg" alt="" class="r r-2x img-full"></a>
+                          <a href="#"><img src="{% static 'images/p8.jpg' %}" alt="" class="r r-2x img-full"></a>
                         </div>
                         <div class="padder-v">
                           <a href="#" class="text-ellipsis">Aliquam sollicitudin venenati</a>
@@ -375,7 +373,7 @@
                               </a>
                             </div>
                           </div>
-                          <a href="#"><img src="/static/test01/images/p9.jpg" alt="" class="r r-2x img-full"></a>
+                          <a href="#"><img src="{% static 'images/p9.jpg' %}" alt="" class="r r-2x img-full"></a>
                         </div>
                         <div class="padder-v">
                           <a href="#" class="text-ellipsis">Lementum ligula vitae</a>
@@ -404,7 +402,7 @@
                               </a>
                             </div>
                           </div>
-                          <a href="#"><img src="/static/test01/images/p10.jpg" alt="" class="r r-2x img-full"></a>
+                          <a href="#"><img src="{% static 'images/p10.jpg' %}" alt="" class="r r-2x img-full"></a>
                         </div>
                         <div class="padder-v">
                           <a href="#" class="text-ellipsis">Egestas dui nec fermentum </a>
@@ -429,7 +427,7 @@
                               </a>
                             </div>
                           </div>
-                          <a href="#"><img src="/static/test01/images/p11.jpg" alt="" class="r r-2x img-full"></a>
+                          <a href="#"><img src="{% static 'images/p11.jpg' %}" alt="" class="r r-2x img-full"></a>
                         </div>
                         <div class="padder-v">
                           <a href="#" class="text-ellipsis">Aliquam sollicitudin venenatis ipsum</a>
@@ -453,7 +451,7 @@
                               </a>
                             </div>
                           </div>
-                          <a href="#"><img src="/static/test01/images/p12.jpg" alt="" class="r r-2x img-full"></a>
+                          <a href="#"><img src="{% static 'images/p12.jpg' %}" alt="" class="r r-2x img-full"></a>
                         </div>
                         <div class="padder-v">
                           <a href="#" class="text-ellipsis">Vestibulum ullamcorper</a>
@@ -474,7 +472,7 @@
                                   <a href="#"><i class="fa fa-play-circle i-2x"></i></a>
                                 </div>
                               </div>
-                              <a href="#"><img src="/static/test01/images/a2.png" alt="" class="r r-2x img-full"></a>
+                              <a href="#"><img src="{% static 'images/a2.png' %}" alt="" class="r r-2x img-full"></a>
                             </div>
                             <div class="padder-v">
                               <a href="#" class="text-ellipsis">Spring rain</a>
@@ -490,7 +488,7 @@
                                   <a href="#"><i class="fa fa-play-circle i-2x"></i></a>
                                 </div>
                               </div>
-                              <a href="#"><img src="/static/test01/images/a3.png" alt="" class="r r-2x img-full"></a>
+                              <a href="#"><img src="{% static 'images/a3.png' %}" alt="" class="r r-2x img-full"></a>
                             </div>
                             <div class="padder-v">
                               <a href="#" class="text-ellipsis">Hope</a>
@@ -506,7 +504,7 @@
                                   <a href="#"><i class="fa fa-play-circle i-2x"></i></a>
                                 </div>
                               </div>
-                              <a href="#"><img src="/static/test01/images/a8.png" alt="" class="r r-2x img-full"></a>
+                              <a href="#"><img src="{% static 'images/a8.png' %}" alt="" class="r r-2x img-full"></a>
                             </div>
                             <div class="padder-v">
                               <a href="#" class="text-ellipsis">Listen wind</a>
@@ -522,7 +520,7 @@
                                   <a href="#"><i class="fa fa-play-circle i-2x"></i></a>
                                 </div>
                               </div>
-                              <a href="#"><img src="/static/test01/images/a9.png" alt="" class="r r-2x img-full"></a>
+                              <a href="#"><img src="{% static 'images/a9.png' %}" alt="" class="r r-2x img-full"></a>
                             </div>
                             <div class="padder-v">
                               <a href="#" class="text-ellipsis">Breaking me</a>
@@ -538,7 +536,7 @@
                                   <a href="#"><i class="fa fa-play-circle i-2x"></i></a>
                                 </div>
                               </div>
-                              <a href="#"><img src="/static/test01/images/a1.png" alt="" class="r r-2x img-full"></a>
+                              <a href="#"><img src="{% static 'images/a1.png' %}" alt="" class="r r-2x img-full"></a>
                             </div>
                             <div class="padder-v">
                               <a href="#" class="text-ellipsis">Nothing</a>
@@ -554,7 +552,7 @@
                                   <a href="#"><i class="fa fa-play-circle i-2x"></i></a>
                                 </div>
                               </div>
-                              <a href="#"><img src="/static/test01/images/a6.png" alt="" class="r r-2x img-full"></a>
+                              <a href="#"><img src="{% static 'images/a6.png' %}" alt="" class="r r-2x img-full"></a>
                             </div>
                             <div class="padder-v">
                               <a href="#" class="text-ellipsis">Panda Style</a>
@@ -570,7 +568,7 @@
                                   <a href="#"><i class="fa fa-play-circle i-2x"></i></a>
                                 </div>
                               </div>
-                              <a href="#"><img src="/static/test01/images/a7.png" alt="" class="r r-2x img-full"></a>
+                              <a href="#"><img src="{% static 'images/a7.png' %}" alt="" class="r r-2x img-full"></a>
                             </div>
                             <div class="padder-v">
                               <a href="#" class="text-ellipsis">Hook Me</a>
@@ -586,7 +584,7 @@
                                   <a href="#"><i class="fa fa-play-circle i-2x"></i></a>
                                 </div>
                               </div>
-                              <a href="#"><img src="/static/test01/images/a5.png" alt="" class="r r-2x img-full"></a>
+                              <a href="#"><img src="{% static 'images/a5.png' %}" alt="" class="r r-2x img-full"></a>
                             </div>
                             <div class="padder-v">
                               <a href="#" class="text-ellipsis">Tempered Song</a>
@@ -602,7 +600,7 @@
                         <a href="#" class="list-group-item clearfix">
                           <span class="pull-right h2 text-muted m-l">1</span>
                           <span class="pull-left thumb-sm avatar m-r">
-                            <img src="/static/test01/images/a4.png" alt="...">
+                            <img src="{% static 'images/a4.png' %}" alt="...">
                           </span>
                           <span class="clear">
                             <span>Little Town</span>
@@ -612,7 +610,7 @@
                         <a href="#" class="list-group-item clearfix">
                           <span class="pull-right h2 text-muted m-l">2</span>
                           <span class="pull-left thumb-sm avatar m-r">
-                            <img src="/static/test01/images/a5.png" alt="...">
+                            <img src="{% static 'images/a5.png' %}" alt="...">
                           </span>
                           <span class="clear">
                             <span>Lementum ligula vitae</span>
@@ -622,7 +620,7 @@
                         <a href="#" class="list-group-item clearfix">
                           <span class="pull-right h2 text-muted m-l">3</span>
                           <span class="pull-left thumb-sm avatar m-r">
-                            <img src="/static/test01/images/a6.png" alt="...">
+                            <img src="{% static 'images/a6.png' %}" alt="...">
                           </span>
                           <span class="clear">
                             <span>Aliquam sollicitudin venenatis</span>
@@ -632,7 +630,7 @@
                         <a href="#" class="list-group-item clearfix">
                           <span class="pull-right h2 text-muted m-l">4</span>
                           <span class="pull-left thumb-sm avatar m-r">
-                            <img src="/static/test01/images/a7.png" alt="...">
+                            <img src="{% static 'images/a7.png' %}" alt="...">
                           </span>
                           <span class="clear">
                             <span>Aliquam sollicitudin venenatis ipsum</span>
@@ -642,7 +640,7 @@
                         <a href="#" class="list-group-item clearfix">
                           <span class="pull-right h2 text-muted m-l">5</span>
                           <span class="pull-left thumb-sm avatar m-r">
-                            <img src="/static/test01/images/a8.png" alt="...">
+                            <img src="{% static 'images/a8.png' %}" alt="...">
                           </span>
                           <span class="clear">
                             <span>Vestibulum ullamcorper</span>
@@ -682,16 +680,16 @@
       </section>
     </section>    
   </section>
-  <script src="/static/test01/js/jquery.min.js"></script>
+  <script src="{% static 'js/jquery.min.js' %}"></script>
   <!-- Bootstrap -->
-  <script src="/static/test01/js/bootstrap.js"></script>
+  <script src="{% static 'js/bootstrap.js' %}"></script>
   <!-- App -->
-  <script src="/static/test01/js/app.js"></script>
-  <script src="/static/test01/js/slimscroll/jquery.slimscroll.min.js"></script>
-    <script src="/static/test01/js/app.plugin.js"></script>
-  <script type="text/javascript" src="/static/test01/js/jPlayer/jquery.jplayer.min.js"></script>
-  <script type="text/javascript" src="/static/test01/js/jPlayer/add-on/jplayer.playlist.min.js"></script>
-  <script type="text/javascript" src="/static/test01/js/jPlayer/demo.js"></script>
+  <script src="{% static 'js/app.js' %}"></script>
+  <script src="{% static 'js/slimscroll/jquery.slimscroll.min.js' %}"></script>
+    <script src="{% static 'js/app.plugin.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/jPlayer/jquery.jplayer.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/jPlayer/add-on/jplayer.playlist.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/jPlayer/demo.js' %}"></script>
 <div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
 </body>
 </html>

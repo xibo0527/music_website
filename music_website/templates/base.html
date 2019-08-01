@@ -1,21 +1,22 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en" class="app">
 <head>  
   <meta charset="utf-8" />
   <title>Musik | Web Application</title>
   <meta name="description" content="app, web app, responsive, admin dashboard, admin, flat, flat ui, ui kit, off screen nav" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <link rel="stylesheet" href="/static/test01/js/jPlayer/jplayer.flat.css" type="text/css" />
-  <link rel="stylesheet" href="/static/test01/css/bootstrap.css" type="text/css" />
-  <link rel="stylesheet" href="/static/test01/css/animate.css" type="text/css" />
-  <link rel="stylesheet" href="/static/test01/css/font-awesome.min.css" type="text/css" />
-  <link rel="stylesheet" href="/static/test01/css/simple-line-icons.css" type="text/css" />
-  <link rel="stylesheet" href="/static/test01/css/font.css" type="text/css" />
-  <link rel="stylesheet" href="/static/test01/css/app.css" type="text/css" />
+  <link rel="stylesheet" href="{% static 'js/jPlayer/jplayer.flat.css' %}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'css/animate.css' %}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'css/simple-line-icons.css' %}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'css/font.css' %}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'css/app.css' %}" type="text/css" />
     <!--[if lt IE 9]>
-    <script src="/static/test01/js/ie/html5shiv.js"></script>
-    <script src="/static/test01/js/ie/respond.min.js"></script>
-    <script src="/static/test01/js/ie/excanvas.js"></script>
+    <script src="{% static 'js/ie/html5shiv.js' %}"></script>
+    <script src="{% static 'js/ie/respond.min.js' %}"></script>
+    <script src="{% static 'js/ie/excanvas.js' %}"></script>
   <![endif]-->
 </head>
 <body class="">
@@ -25,9 +26,9 @@
         <a class="btn btn-link visible-xs" data-toggle="class:nav-off-screen,open" data-target="#nav,html">
           <i class="icon-list"></i>
         </a>
-        <a href="index.html" class="navbar-brand text-lt">
+        <a href="{% url 'repo:index' %}" class="navbar-brand text-lt">
           <i class="icon-earphones"></i>
-          <img src="/static/test01/images/logo.png" alt="." class="hide">
+          <img src="{% static 'images/logo.png' %}" alt="." class="hide">
           <span class="hidden-nav-xs m-l-sm">Musik</span>
         </a>
         <a class="btn btn-link visible-xs" data-toggle="dropdown" data-target=".user">
@@ -56,7 +57,7 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle bg clear" data-toggle="dropdown">
               <span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm">
-                <img src="/static/test01/images/a0.png" alt="...">
+                <img src="{% static 'images/a0.png' %}" alt="...">
               </span>
               John.Smith <b class="caret"></b>
             </a>
@@ -93,23 +94,20 @@
           <section class="vbox">
             <section class="w-f-md scrollable">
               <div class="slim-scroll" data-height="auto" data-disable-fade-out="true" data-distance="0" data-size="10px" data-railOpacity="0.2">
-                
-
-
-                <!-- nav -->                 
+                  <!-- nav -->
                 <nav class="nav-primary hidden-xs">
                   <ul class="nav bg clearfix">
                     <li class="hidden-nav-xs padder m-t m-b-sm text-xs text-muted">
                       Discover
                     </li>
                     <li>
-                      <a href="index.html">
+                      <a href="{% url 'repo:index' %}">
                         <i class="icon-disc icon text-success"></i>
                         <span class="font-bold">首页</span>
                       </a>
                     </li>
                     <li>
-                      <a href="genres.html">
+                      <a href="{% url 'genres:genres' %}">
                         <i class="icon-music-tone-alt icon text-info"></i>
                         <span class="font-bold">流派</span>
                       </a>
@@ -136,21 +134,22 @@
         </aside>
         <!-- /.aside -->
         <section id="content">
-          {% block content %}要替换的内容{% endblock %}
+          {% block content %}
+          {% endblock %}
         </section>
       </section>
     </section>    
   </section>
-  <script src="/static/test01/js/jquery.min.js"></script>
+  <script src="{% static 'js/jquery.min.js' %}"></script>
   <!-- Bootstrap -->
-  <script src="/static/test01/js/bootstrap.js"></script>
+  <script src="{% static 'js/bootstrap.js' %}"></script>
   <!-- App -->
-  <script src="/static/test01/js/app.js"></script>
-  <script src="/static/test01/js/slimscroll/jquery.slimscroll.min.js"></script>
-    <script src="/static/test01/js/app.plugin.js"></script>
-  <script type="text/javascript" src="/static/test01/js/jPlayer/jquery.jplayer.min.js"></script>
-  <script type="text/javascript" src="/static/test01/js/jPlayer/add-on/jplayer.playlist.min.js"></script>
-  <script type="text/javascript" src="/static/test01/js/jPlayer/demo.js"></script>
+  <script src="{% static 'js/app.js' %}"></script>
+  <script src="{% static 'js/slimscroll/jquery.slimscroll.min.js' %}"></script>
+    <script src="{% static 'js/app.plugin.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/jPlayer/jquery.jplayer.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/jPlayer/add-on/jplayer.playlist.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/jPlayer/demo.js' %}"></script>
 <div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
 </body>
 </html>
