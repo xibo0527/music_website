@@ -19,6 +19,7 @@ class RegistForm(forms.ModelForm):
                                         attrs={"class": "form-control rounded input-lg text-center no-border",
                                                'placeholder': '验证码', "error_messages": {"invalid": "验证码错误"},"style": "width:150px;"}),
                                     )
+
     class Meta:
         model = User
         fields = ['username', 'mobile', 'password']

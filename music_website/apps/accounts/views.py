@@ -26,7 +26,7 @@ class Regist(View):
                 mobile_captcha = form.cleaned_data["mobile_captcha"]
                 mobile_captcha_reids = cache.get(mobile)
                 if mobile_captcha == mobile_captcha_reids:
-                    user = User.objects.create(username=username, password=make_password(password))
+                    user = User.objects.create(username=username, password=make_password(password),mobile=mobile)
                     user.save()
                     ret['status'] = 200
                     ret['msg'] = "注册成功"
