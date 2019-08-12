@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 # Create your models here.
 
-from apps.repo.models import MusicInfo
+# from apps.repo.models import MusicInfo
 SEX_CHOICES = (
     (0,'男'),
     (1,'女'),
@@ -17,4 +17,4 @@ class User(AbstractUser):
     desc = models.CharField(verbose_name='个人说明', max_length=254, null=True, blank=True)
     sex = models.IntegerField(verbose_name='性别', choices=SEX_CHOICES,null=True,blank=True)
 
-    lovesongs = models.ManyToManyField(MusicInfo,verbose_name='喜欢的音乐')
+    # lovesongs = models.ManyToManyField(MusicInfo,verbose_name='喜欢的音乐表')
