@@ -10,20 +10,21 @@ SONG_TYPE = (
     (4,'轻音乐'),
 )
 
-class SongCategory(models.Model):
-    name = models.IntegerField("分类名称", max_length=64,choices=SONG_TYPE)
-    class Meta:
-        verbose_name = '歌曲分类'
-        verbose_name_plural = verbose_name
-
-    def __str__(self):
-        return self.name
+# class SongCategory(models.Model):
+#     name = models.IntegerField("分类名称", max_length=64,choices=SONG_TYPE)
+#     class Meta:
+#         verbose_name = '歌曲分类'
+#         verbose_name_plural = verbose_name
+#
+#     def __str__(self):
+#         return self.name
 
 class Singer(models.Model):
     name = models.CharField(verbose_name='歌手名',max_length=64)
     img = models.CharField(verbose_name='歌手图片链接',max_length=254,null=True)
-    country = models.CharField(verbose_name='国家',max_length='32',null=True)
-    sing_mid = models.CharField(verbose_name='歌手id',max_length=32,null=True)
+    country = models.CharField(verbose_name='国家',max_length=32,null=True)
+    singer_mid = models.CharField(verbose_name='歌手id',max_length=64,null=True)
+    fans = models.IntegerField(verbose_name='粉丝数',max_length=64,default=0)
 
     class Meta:
         verbose_name = '歌手表'
@@ -34,7 +35,7 @@ class Singer(models.Model):
 class MusicInfo(models.Model):
 
     name = models.CharField(verbose_name='歌曲名',unique=True,max_length=254)
-    singer = models.OneToOneField(Singer,verbose_name='歌手')
+    singer = models.ForeignKey(Singer,verbose_name='歌手')
     song_id = models.CharField(verbose_name='音乐id', max_length=32,null=True)
     url = models.CharField(verbose_name='歌曲链接',max_length=254,null=True)
     img = models.CharField(verbose_name='歌曲图片链接',max_length=254,null=True)
