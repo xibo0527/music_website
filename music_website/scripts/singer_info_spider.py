@@ -13,12 +13,6 @@ ret = requests.get(url,headers=headers).text
 ret = json.loads(ret)['data']
 print(type(ret))
 
-# with open('singer_info.csv','w',encoding='utf-8') as csvfile:
-#     fieldnames = ['name', 'img', 'country', 'singer_mid']
-#     writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-#     writer.writeheader()
-#     for i in range(len(ret)):
-#         writer.writerow({'name':ret[i]['singer_name'],'img':ret[i]['singer_pic'],'country':ret[i]['country'],'singer_mid':ret[i]['singer_mid']})
 
 file_name = '.\\singer_info1.xlsx'
 workbook = xlsxwriter.Workbook(file_name)

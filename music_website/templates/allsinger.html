@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}歌手列表-Musik音乐{% endblock %}
+{% block content %}
+        <div class="dropdown">
+          <button class="btn btn-danger dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            选择分类
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <li><a href="{% url 'repo:allsinger' %}">全部</a></li>
+              <li><a href="{% url 'repo:allsinger' %}?category=1">流行</a></li>
+              <li><a href="{% url 'repo:allsinger' %}?category=2">民谣</a></li>
+              <li><a href="{% url 'repo:allsinger' %}?category=3">英文</a></li>
+              <li><a href="{% url 'repo:allsinger' %}?category=4">轻音乐</a></li>
+          </ul>
+        </div>
+      <section class="vbox">
+        <section class="scrollable padder-lg">
+          <h3 class="font-thin m-b">歌手</h3>
+          <div class="row row-sm">
+              {% for item in contacts.object_list %}
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-1">
+              <div class="item">
+                <div class="pos-rlt">
+                    {% if forloop.counter < 13 %}
+                  <a href="{% url 'detail:singer_detail' item.singer_mid %}"><img src="{{ item.img }}" alt="" class="r r-2x img-full"></a>
+                    {% endif %}
+                </div>
+                <div class="padder-v">
+                  <a href="{% url 'detail:singer_detail' item.singer_mid %}" data-bjax data-target="#bjax-target" data-el="#bjax-el" data-replace="true" class="text-ellipsis">{{ item }}</a>
+                </div>
+              </div>
+            </div>
+              {% endfor %}
+          </div>
+          <ul class="pagination pagination">
+          {% if contacts.has_previous %}
+              {% if category == 0 %}
+                  <li><a href="?page=1">第一页</a></li>
+                  <li><a href="?page={{ contacts.previous_page_number }}"><i class="fa fa-chevron-left"></i></a></li>
+              {% else %}
+                  <li><a href="?category={{ category }}&page=1">第一页</a></li>
+                  <li><a href="?category={{ category }}&page={{ contacts.previous_page_number }}"><i class="fa fa-chevron-left"></i></a></li>
+              {% endif %}
+          {% endif %}
+{#            <li class="active"><a href="#">1</a></li>#}
+
+            {% if contacts.has_next %}
+                {% if category == 0  %}
+                    <li><a href="?page={{ contacts.next_page_number }}"><i class="fa fa-chevron-right"></i></a></li>
+                    <li><a href="?page={{ contacts.paginator.num_pages }}">最后一页</a></li>
+                    {% else %}
+                    <li><a href="?category={{ category }}&page={{ contacts.next_page_number }}"><i class="fa fa-chevron-right"></i></a></li>
+                    <li><a href="?category={{ category }}&page={{ contacts.paginator.num_pages }}">最后一页</a></li>
+                    {% endif %}
+            {% endif %}
+          </ul>
+        </section>
+      </section>
+
+{% endblock %}

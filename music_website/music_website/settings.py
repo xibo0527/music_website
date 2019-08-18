@@ -25,7 +25,7 @@ SECRET_KEY = '30z3nxso&&_50gdkl3%5k8jthcah%7mqp=!c_y9q=(xp3rzstm'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'apps.detail',
     'apps.apis',
     'apps.repo',
+    'easy_thumbnails',
 ]
 
 MIDDLEWARE = [
@@ -254,3 +255,15 @@ CACHES = {
 }
 
 FontPath = os.path.join(BASE_DIR,'static/fonts/')
+
+# 配置媒体文件 图片
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+if not os.path.exists(MEDIA_ROOT):
+    os.mkdir(MEDIA_ROOT)
+MEDIA_URL = '/media/'
+
+THUMBNAIL_ALIASES = {
+    '':{
+        'avatar':{'size':(50,50),'crop':True}
+    }
+}

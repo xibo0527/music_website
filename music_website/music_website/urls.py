@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.conf.urls import url,include
 from django.contrib import admin
+from django.views.static import serve
+from .settings import MEDIA_ROOT
 
 
 urlpatterns = [
@@ -25,4 +27,7 @@ urlpatterns = [
     url(r'^genres/',include('apps.genres.urls',namespace='genres')),
     url(r'^detail/',include('apps.detail.urls',namespace='detail')),
     url(r'^apis/',include('apps.apis.urls',namespace='apis')),
+    url(r'^uc/',include('apps.usercenter.urls',namespace='usercenter')),
+
+    url(r'^media/(?P<path>.*)$', serve, {"document_root": MEDIA_ROOT}),
 ]

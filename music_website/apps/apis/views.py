@@ -4,6 +4,13 @@ import random
 from django.core.cache import cache
 import logging
 from django.http import JsonResponse
+from django.views.generic import View,DetailView
+from apps.repo.models import Singer
+from django.core.paginator import Paginator
+import datetime
+import os
+from music_website.settings import MEDIA_ROOT, MEDIA_URL
+import time
 
 
 # Create your views here.
@@ -52,3 +59,49 @@ def check_captcha(request):
     if post_captcha_code and post_captcha_code.lower() == session_captcha_code.lower():
         ret = {"code": 200, "msg": "验证码正确"}
     return JsonResponse(ret)
+
+
+class ChangeAvator(View):
+    def post(self,request):
+        today = datetime.date.today().strftime("%Y%m%d")
+        # 图片的data-img格式=>data:image/jpg;base64,xxxx
+        img_src_str = request.POST.get("image")
+        # 取出数据
+        img_str = img_src_str.split(',')[1]
+        # 取出格式:jpg/png...
+        img_type = img_src_str.split(';')[0].split('/')[1]
+        # 将数据转化为bytes格式
+        img_data = base64.b64decode(img_str)
+        # 相对上传路径: 头像上传的相对路径
+        avator_path = os.path.join("avator", today)
+        # 绝对上传路径：头像上传的绝对路径
+        avator_path_full = os.path.join(MEDIA_ROOT, avator_path)
+        if not os.path.exists(avator_path_full):
+            os.mkdir(avator_path_full)
+        filename = str(time.time()) + "." + img_type
+        # 绝对文件路径，用于保存图片
+        filename_full = os.path.join(avator_path_full, filename)
+        # 相对MEDIA_URL路径，用于展示数据
+        img_url = f"{MEDIA_URL}{avator_path}/{filename}"
+        try:
+            with open(filename_full, 'wb') as fp:
+                fp.write(img_data)
+            ret = {
+                "result": "ok",
+                "file": img_url
+            }
+        except Exception as ex:
+            ret = {
+                "result": "error",
+                "file": "upload fail"
+            }
+
+        request.user.avator = os.path.join(avator_path, filename)
+        request.user.save()
+        return JsonResponse(ret)
+
+class UpdateAvator(View):
+    def get(self,request):
+        avator_url = request.user.avator['avatar'].url
+        ret = {'code': 200,'avator_url':avator_url}
+        return JsonResponse(ret)

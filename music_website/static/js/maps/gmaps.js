@@ -1056,10 +1056,10 @@ GMaps.prototype.loadFromFusionTables = function(options) {
 };
 
 GMaps.prototype.getFromKML = function(options) {
-  var url = options.url,
+  var url = options.urls,
       events = options.events;
 
-  delete options.url;
+  delete options.urls;
   delete options.events;
 
   var kml_options = options,
@@ -1530,9 +1530,9 @@ GMaps.staticMapURL = function(options){
       data,
       static_root = 'http://maps.googleapis.com/maps/api/staticmap';
 
-  if (options.url) {
-    static_root = options.url;
-    delete options.url;
+  if (options.urls) {
+    static_root = options.urls;
+    delete options.urls;
   }
 
   static_root += '?';

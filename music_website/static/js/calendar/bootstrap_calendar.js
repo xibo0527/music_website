@@ -281,7 +281,7 @@ $.fn.calendar = function(options) {
             if (req_ajax != false){
                 $.ajax({
                     type: req_ajax.type,
-                    url: req_ajax.url,
+                    url: req_ajax.urls,
                     data: { month: month + 1, year: year },
                     dataType: 'json'
                 }).done(function( data ) {

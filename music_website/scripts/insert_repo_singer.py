@@ -10,12 +10,12 @@ conn = sqlite3.connect('../db.sqlite3')
 cur = conn.cursor()
 
 # 清空表
-sql = "delete from repo_singer"
-cur.execute(sql)
-conn.commit()
+# sql = "delete from repo_singer"
+# cur.execute(sql)
+# conn.commit()
 
 # 读取数据并入库
-workbook = xlrd.open_workbook('singer_info1.xlsx')
+workbook = xlrd.open_workbook('singer_info轻音乐.xlsx')
 sheet_names= workbook.sheet_names()
 for sheet_name in sheet_names:
     sheet = workbook.sheet_by_name(sheet_name)
@@ -30,7 +30,8 @@ for sheet_name in sheet_names:
             img = sheet.row_values(i)[1]
             country = sheet.row_values(i)[2]
             singer_mid = sheet.row_values(i)[3]
-            sql = f"""insert into repo_singer ('name', 'img', 'country', 'singer_mid') values ('{name}','{img}','{country}','{singer_mid}')"""
+            category = sheet.row_values(i)[4]
+            sql = f"""insert into repo_singer ('name', 'img', 'country', 'singer_mid','category_id') values ('{name}','{img}','{country}','{singer_mid}',{category})"""
             cur.execute(sql)
     except Exception as e:
             print('error', e)

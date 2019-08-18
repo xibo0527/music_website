@@ -3,7 +3,7 @@ import requests
 import json
 import xlsxwriter
 
-df = pd.read_excel('song_mid.xlsx')
+df = pd.read_excel('song_mid_流行.xlsx')
 data = df.iloc[:,[0]]
 data = data.values.tolist()
 
@@ -14,7 +14,7 @@ headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36'
 }
 
-file_name = '.\\song_info.xlsx'
+file_name = '.\\song_info_流行.xlsx'
 workbook = xlsxwriter.Workbook(file_name)
 worksheet = workbook.add_worksheet('first_sheet')
 worksheet.write_row('A1',['name','song_mid','url','img','lyric'])

@@ -84,7 +84,7 @@ Modernizr.addTest('ios7 ipad',function(){return!!navigator.userAgent.match(/iPad
   Bjax.prototype.start = function () {
     var that = this;
     this.backdrop();
-    $.ajax(this.options.url).done(function(r){
+    $.ajax(this.options.urls).done(function(r){
       that.$content = r;
       that.complete();
     });
@@ -94,9 +94,9 @@ Modernizr.addTest('ios7 ipad',function(){return!!navigator.userAgent.match(/iPad
     var that = this;
     if( this.$element.is('html') || (this.options.replace) ){
       try{
-        window.history.pushState({}, '', this.options.url);
+        window.history.pushState({}, '', this.options.urls);
       }catch(e){
-        window.location.replace(this.options.url)
+        window.location.replace(this.options.urls)
       }
     }
 

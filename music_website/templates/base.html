@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load thumbnail %}
 <html lang="en" class="app">
 <head>  
   <meta charset="utf-8" />
@@ -18,6 +19,8 @@
     <script src="{% static 'js/ie/respond.min.js' %}"></script>
     <script src="{% static 'js/ie/excanvas.js' %}"></script>
   <![endif]-->
+  {% block load_css %}
+  {% endblock %}
 </head>
 <body class="">
   <section class="vbox">
@@ -48,7 +51,7 @@
             <span class="input-group-btn">
               <button type="submit" class="btn btn-sm bg-white btn-icon rounded"><i class="fa fa-search"></i></button>
             </span>
-            <input type="text" class="form-control input-sm no-border rounded" placeholder="Search songs, albums...">
+            <input type="text" class="form-control input-sm no-border rounded" placeholder="搜索歌曲">
           </div>
         </div>
       </form>
@@ -57,9 +60,9 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle bg clear" data-toggle="dropdown">
               <span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm">
-                <img src="{% static 'images/a0.png' %}" alt="...">
+                <img id="user_avator" src="{{ user.avator |thumbnail_url:'avatar' }}" alt="...">
               </span>
-              John.Smith <b class="caret"></b>
+              {{ user.username }}<b class="caret"></b>
             </a>
             <ul class="dropdown-menu animated fadeInRight">            
               <li>
@@ -67,7 +70,7 @@
                 <a href="#">Settings</a>
               </li>
               <li>
-                <a href="profile.html">Profile</a>
+                <a href="{% url 'usercenter:profile' %}">个人中心</a>
               </li>
               <li>
                 <a href="#">
@@ -80,7 +83,7 @@
               </li>
               <li class="divider"></li>
               <li>
-                <a href="modal.lockme.html" data-toggle="ajaxModal" >Logout</a>
+                  <a href="{% url 'accounts:logout' %}" data-toggle="ajaxModal" >登出</a>
               </li>
             </ul>
           </li>
@@ -107,9 +110,9 @@
                       </a>
                     </li>
                     <li>
-                      <a href="{% url 'repo:allmusic' %}">
+                      <a href="{% url 'repo:allsinger' %}">
                         <i class="icon-music-tone-alt icon text-info"></i>
-                        <span class="font-bold">所有音乐</span>
+                        <span class="font-bold">歌手</span>
                       </a>
                     </li>
                     <li>
@@ -159,6 +162,8 @@
   <script type="text/javascript" src="{% static 'js/jPlayer/jquery.jplayer.min.js' %}"></script>
   <script type="text/javascript" src="{% static 'js/jPlayer/add-on/jplayer.playlist.min.js' %}"></script>
   <script type="text/javascript" src="{% static 'js/jPlayer/demo.js' %}"></script>
+  {% block load_js %}
+  {% endblock %}
 <div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
 </body>
 </html>
