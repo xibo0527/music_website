@@ -4,7 +4,7 @@ import xlsxwriter
 
 import pandas as pd
 
-df = pd.read_excel('singer_info流行.xlsx')
+df = pd.read_excel('singer_info轻音乐.xlsx')
 data = df.iloc[:,[3]]
 # print(data)
 # print(type(data))
@@ -12,7 +12,7 @@ data = df.iloc[:,[3]]
 data = data.values.tolist()
 # print(data)
 
-file_name = '.\\song_mid流行.xlsx'
+file_name = '.\\song_mid轻音乐.xlsx'
 workbook = xlsxwriter.Workbook(file_name)
 worksheet = workbook.add_worksheet('first_sheet')
 headers = {

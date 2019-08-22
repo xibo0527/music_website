@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'apps.apis',
     'apps.repo',
     'easy_thumbnails',
+    'ckeditor',
+    'ckeditor_uploader',
 ]
 
 MIDDLEWARE = [
@@ -266,4 +268,17 @@ THUMBNAIL_ALIASES = {
     '':{
         'avatar':{'size':(50,50),'crop':True}
     }
+}
+
+CKEDITOR_UPLOAD_PATH = "ckeditor_upload"
+CKEDITOR_CONFIGS = {
+    'awesome_ckeditor': {
+        'toolbar': 'Basic',
+    },
+    'default_ckeditor':{
+        'toolbar': 'Full',
+    },
+    'default': {
+        'toolbar': 'Full',
+    },
 }

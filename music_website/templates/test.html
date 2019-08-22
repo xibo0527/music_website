@@ -1,4 +1,6 @@
+{% load static %}
+<script src="{% static '/ckeditor/ckeditor/ckeditor.js' %}"></script>
+<script src="{% static '/ckeditor/ckeditor-init.js' %}"></script>
 <form>
-    {{ form.as_p }}
-    <button type="submit">提交</button>
+    {{ form.content }}
 </form>

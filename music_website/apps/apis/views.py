@@ -5,12 +5,14 @@ from django.core.cache import cache
 import logging
 from django.http import JsonResponse
 from django.views.generic import View,DetailView
-from apps.repo.models import Singer
+from apps.repo.models import Singer,SingerCollection,MusicInfo,SongCollection,SongComments,SongCommentsDianZan
 from django.core.paginator import Paginator
 import datetime
 import os
 from music_website.settings import MEDIA_ROOT, MEDIA_URL
 import time
+from django.forms.models import model_to_dict
+
 
 
 # Create your views here.
@@ -104,4 +106,59 @@ class UpdateAvator(View):
     def get(self,request):
         avator_url = request.user.avator['avatar'].url
         ret = {'code': 200,'avator_url':avator_url}
+        return JsonResponse(ret)
+
+class SingerCollect(View):
+    def get(self,request,id):
+        singer = Singer.objects.get(singer_mid=id)
+
+        result = SingerCollection.objects.get_or_create(user=request.user,singer=singer)
+        singer_collection = result[0]
+        if not result[1]:
+            if singer_collection.status:singer_collection.status = False
+            else:singer_collection.status = True
+        singer_collection.save()
+        fans = singer.singer_collection_set.filter(status=True).count()
+        msg = model_to_dict(singer_collection)
+        ret = {
+            'code':200,'msg':msg,'fans':fans
+        }
+        return JsonResponse(ret)
+
+class SongCollect(View):
+    def get(self,request,id):
+        music = MusicInfo.objects.get(id=id)
+        result = SongCollection.objects.get_or_create(user=request.user,music=music)
+        song_collection = result[0]
+        if not result[1]:
+            if song_collection.status:song_collection.status = False
+            else:song_collection.status = True
+        song_collection.save()
+        msg = model_to_dict(song_collection)
+        ret = {
+            'code':200,'msg':msg
+        }
+        return JsonResponse(ret)
+
+class DianZan(View):
+    def get(self,request,id):
+        comment = SongComments.objects.get(id=id)
+        result = SongCommentsDianZan.objects.get_or_create(user=request.user,comment=comment)
+        comment_dianzan = result[0]
+        if not result[1]:
+            if comment_dianzan.status:
+                comment_dianzan.status = False
+                comment.nice = comment.nice - 1
+            else:
+                comment_dianzan.status = True
+                comment.nice = comment.nice + 1
+        else:
+            comment.nice = comment.nice + 1
+        comment.save()
+        comment_dianzan.save()
+        msg = model_to_dict(comment_dianzan)
+        msg1 = model_to_dict(comment)
+        ret = {
+            'code':200,'msg':msg,'msg1':msg1
+        }
         return JsonResponse(ret)

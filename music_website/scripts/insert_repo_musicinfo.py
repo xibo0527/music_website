@@ -2,7 +2,7 @@ import sqlite3
 import xlrd
 
 # xlrd：操作Excel
-# pandas:
+# pandas
 
 
 #　连接数据库
@@ -10,12 +10,12 @@ conn = sqlite3.connect('../db.sqlite3')
 cur = conn.cursor()
 
 # 清空表
-# sql = "delete from repo_singer"
-# # cur.execute(sql)
-# # conn.commit()
+# sql = "delete from repo_musicinfo"
+# cur.execute(sql)
+# conn.commit()
 
 # 读取数据并入库
-workbook = xlrd.open_workbook('singer_info轻音乐.xlsx')
+workbook = xlrd.open_workbook('song_info_轻音乐.xlsx')
 sheet_names= workbook.sheet_names()
 for sheet_name in sheet_names:
     sheet = workbook.sheet_by_name(sheet_name)
@@ -27,11 +27,13 @@ for sheet_name in sheet_names:
             print(f"正在插入第{i}行")
             # print(sheet.row_values(i))
             name = sheet.row_values(i)[0]
-            img = sheet.row_values(i)[1]
-            area = sheet.row_values(i)[2]
-            singer_mid = sheet.row_values(i)[3]
-            category = sheet.row_values(i)[4]
-            sql = f"""insert into repo_singer ('name', 'img', 'area', 'singer_mid','category_id') values ('{name}','{img}','{area}','{singer_mid}',{category})"""
+            song_mid = sheet.row_values(i)[1]
+            url = sheet.row_values(i)[2]
+            img = sheet.row_values(i)[3]
+            lyric = sheet.row_values(i)[4]
+            category = 4
+            singer_mid = sheet.row_values(i)[5]
+            sql = f"""insert into repo_musicinfo ('name', 'song_id', 'url', 'img','lyric','category_id','singer_id') values ('{name}','{song_mid}','{url}','{img}','{lyric}','{category}','{singer_mid}')"""
             cur.execute(sql)
     except Exception as e:
             print('error', e)

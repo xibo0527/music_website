@@ -25,3 +25,9 @@ class AllSinger(LoginRequiredMixin,View):
             'category': category,
         }
         return render(request,'allsinger.html',kwgs)
+
+from .forms import CommentsForm
+class Test(View):
+    def get(self,request):
+        form = CommentsForm()
+        return render(request,'test.html',{'form':form})
