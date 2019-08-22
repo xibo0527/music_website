@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # 'apps.test01',
     'apps.accounts',
-    'apps.genres',
+    'apps.songlist',
     'apps.detail',
     'apps.apis',
     'apps.repo',
@@ -266,7 +266,9 @@ MEDIA_URL = '/media/'
 
 THUMBNAIL_ALIASES = {
     '':{
-        'avatar':{'size':(50,50),'crop':True}
+        'avatar':{'size':(50,50),'crop':True},
+        'avatar115':{'size':(115,115),'crop':True},
+        'songlist280':{'size':(280,280),'crop':True},
     }
 }
 

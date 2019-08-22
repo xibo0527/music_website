@@ -15,3 +15,4 @@ class CommentsForm(forms.ModelForm):
             raise ValidationError('评论数据不合法')
         else:
             return self.cleaned_data.get('content')
+

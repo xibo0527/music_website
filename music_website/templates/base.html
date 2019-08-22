@@ -111,34 +111,36 @@
                     </li>
                     <li>
                       <a href="{% url 'repo:allsinger' %}">
-                        <i class="icon-music-tone-alt icon text-info"></i>
+                        <i class="glyphicon glyphicon-user text-success"></i>
                         <span class="font-bold">歌手</span>
                       </a>
                     </li>
                     <li>
-                      <a href="{% url 'genres:genres' %}">
-                        <i class="icon-list icon  text-info-dker"></i>
-                        <span class="font-bold">分类歌单</span>
+                      <a href="{% url 'songlist:songlist' %}">
+                        <i class="icon-list icon  text-success"></i>
+                        <span class="font-bold">歌单</span>
                       </a>
                     </li>
                     <li class="m-b hidden-nav-xs"></li>
-                  </ul>
-                  <ul class="nav text-sm">
-                    <li class="hidden-nav-xs padder m-t m-b-sm text-xs text-muted">
-                      <span class="pull-right"><a href="#"><i class="icon-plus i-lg"></i></a></span>
-                      Playlist
+                    <li>
+                      <a href="#myModal" data-toggle="modal">
+                        <i class="glyphicon glyphicon-plus text-success"></i>
+                        <span class="font-bold">创建歌单</span>
+                      </a>
                     </li>
-
+                    <li>
+                        {% include 'create_songlist_modal.html' %}
+                      <a href="{% url 'usercenter:my_music' %}">
+                        <i class="icon-music-tone-alt icon text-danger"></i>
+                        <span class="font-bold">我的音乐</span>
+                      </a>
+                    </li>
+                    <li class="m-b hidden-nav-xs"></li>
                   </ul>
                 </nav>
                 <!-- / nav -->
               </div>
             </section>
-            
-            <footer class="footer hidden-xs no-padder text-center-nav-xs">
-              <div class="bg hidden-xs ">
-
-                </div>            </footer>
           </section>
         </aside>
         <!-- /.aside -->

@@ -5,7 +5,7 @@ from django.core.cache import cache
 import logging
 from django.http import JsonResponse
 from django.views.generic import View,DetailView
-from apps.repo.models import Singer,SingerCollection,MusicInfo,SongCollection,SongComments,SongCommentsDianZan
+from apps.repo.models import Singer,SingerCollection,MusicInfo,SongCollection,SongComments,SongCommentsDianZan,MusicListInfo,MusicListCollection
 from django.core.paginator import Paginator
 import datetime
 import os
@@ -115,10 +115,18 @@ class SingerCollect(View):
         result = SingerCollection.objects.get_or_create(user=request.user,singer=singer)
         singer_collection = result[0]
         if not result[1]:
-            if singer_collection.status:singer_collection.status = False
-            else:singer_collection.status = True
+            if singer_collection.status:
+                singer_collection.status = False
+                singer.fans = singer.fans-1
+            else:
+                singer_collection.status = True
+                singer.fans = singer.fans + 1
+        else:
+            singer.fans = singer.fans + 1
+        singer.save()
         singer_collection.save()
-        fans = singer.singer_collection_set.filter(status=True).count()
+        # fans = singer.singer_collection_set.filter(status=True).count()
+        fans = singer.fans
         msg = model_to_dict(singer_collection)
         ret = {
             'code':200,'msg':msg,'fans':fans
@@ -131,8 +139,15 @@ class SongCollect(View):
         result = SongCollection.objects.get_or_create(user=request.user,music=music)
         song_collection = result[0]
         if not result[1]:
-            if song_collection.status:song_collection.status = False
-            else:song_collection.status = True
+            if song_collection.status:
+                song_collection.status = False
+                music.fans = music.fans - 1
+            else:
+                song_collection.status = True
+                music.fans = music.fans + 1
+        else:
+            music.fans = music.fans + 1
+        music.save()
         song_collection.save()
         msg = model_to_dict(song_collection)
         ret = {
@@ -160,5 +175,29 @@ class DianZan(View):
         msg1 = model_to_dict(comment)
         ret = {
             'code':200,'msg':msg,'msg1':msg1
+        }
+        return JsonResponse(ret)
+
+class SongListCollect(View):
+    def get(self,request,id):
+        music_list = MusicListInfo.objects.get(id=id)
+        result = MusicListCollection.objects.get_or_create(user=request.user, name=music_list)
+        music_list_collection = result[0]
+        if not result[1]:
+            if music_list_collection.status:
+                music_list_collection.status = False
+                music_list.fans = music_list.fans - 1
+            else:
+                music_list_collection.status = True
+                music_list.fans = music_list.fans + 1
+        else:
+            music_list.fans = music_list.fans + 1
+        music_list.save()
+        music_list_collection.save()
+        # fans = music_list.musiclist_collection_set.filter(status=True).count()
+        fans = music_list.fans
+        msg = model_to_dict(music_list_collection)
+        ret = {
+            'code': 200, 'msg': msg, 'fans': fans
         }
         return JsonResponse(ret)

@@ -14,7 +14,8 @@ class SingerDetail(View):
         music = MusicInfo.objects.filter(singer_id=id)
         p = Paginator(music, pagesize)
         music = p.page(page_num)
-        fans = singer.singer_collection_set.filter(status=True).count()
+        # fans = singer.singer_collection_set.filter(status=True).count()
+        fans = singer.fans
         status = SingerCollection.objects.filter(user=request.user,status=True,singer=singer)
         kwgs = {
             'singer':singer,
@@ -41,14 +42,10 @@ class SongDetail(View):
         for comments in goodcomments:
             status_dianzan = SongCommentsDianZan.objects.filter(comment=comments,user=request.user,status=True)
             status_dianzan_dic1[comments] = status_dianzan
-        print(status_dianzan_dic)
-        print(status_dianzan_dic1)
         kwgs = {
             'music':music,
             'status':status,
             'form':form,
-            # 'latestcomments':latestcomments,
-            # 'goodcomments':goodcomments,
             'count':count,
             'status_dianzan_dic':status_dianzan_dic,
             'status_dianzan_dic1':status_dianzan_dic1

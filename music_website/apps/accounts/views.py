@@ -13,7 +13,7 @@ logger = logging.getLogger('account')
 class Regist(View):
     def get(self,request):
         form = RegistForm()
-        return render(request,'regist1.html',{'form':form})
+        return render(request, 'regist.html', {'form':form})
     def post(self, request):
         ret = {"status": 400, "msg": "调用方式错误"}
         # 检查是不是ajax的请求
@@ -56,7 +56,7 @@ class Login(View):
         if request.user.is_authenticated:
             return redirect(request.session['next'])
         form = LoginForm()
-        return render(request, 'login1.html', {'form': form})
+        return render(request, 'login.html', {'form': form})
 
     def post(self, request):
         form = LoginForm(request.POST)
@@ -82,7 +82,7 @@ class Login(View):
         else:
             msg = "表单数据不完整"
             logger.error(msg)
-        return render(request, "login1.html", {"form": form, "msg": msg})
+        return render(request, "login.html", {"form": form, "msg": msg})
 
 def logout(request):
     auth.logout(request)

@@ -37,3 +37,7 @@ class Profile(View):
 class ChangePasswdView(View):
     def get(self,request):
         return render(request, "uc_change_passwd.html")
+
+class MyMusic(View):
+    def get(self,request):
+        return render(request,'mymusic.html')

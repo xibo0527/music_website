@@ -18,6 +18,7 @@
     <script src="js/ie/respond.min.js"></script>
     <script src="js/ie/excanvas.js"></script>
   <![endif]-->
+    <script src="{% static 'js/jquery.js' %}"></script>
 </head>
 <body class="bg-info dker">
   <section id="content" class="m-t-lg wrapper-md animated fadeInUp">    
@@ -27,18 +28,38 @@
         <header class="wrapper text-center">
           <strong>登录发现有趣的事情</strong>
         </header>
-        <form>
-          <div class="form-group">
-            <input type="tel" placeholder="手机账号" class="form-control rounded input-lg text-center no-border">
-          </div>
-          <div class="form-group">
-             <input type="password" placeholder="输入密码" class="form-control rounded input-lg text-center no-border">
-          </div>
-          <button type="submit" class="btn btn-lg btn-warning lt b-white b-2x btn-block btn-rounded"><i class="icon-arrow-right pull-right"></i><span class="m-r-n-lg">登录</span></button>
-          <div class="text-center m-t m-b"><a href="{% static '#' %}"><small>忘记密码?</small></a></div>
-          <div class="line line-dashed"></div>
-          <p class="text-muted text-center"><small>还没有账号?</small></p>
-          <a href="{% url 'accounts:regist' %}" class="btn btn-lg btn-info btn-block rounded">创建账号</a>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+              {{ form.username }}
+            </div>
+            <div class="form-group">
+              {{ form.password }}
+            </div>
+            <div class="form-group">
+                {{ form.captcha }}
+            </div>
+            <div class="form-group" style="position: absolute;margin-top: -50px;margin-left:200px">
+            <a href="javascript:void(0);"><img id="captcha_img" src="data:image/jpg;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAAeCAIAAABoq03CAAACcUlEQVR4nO1aQXLCMAxcMX1A4cwM
+    Fz7QQzu8hA8wPKIz/QB/gFM/U9pLf1J+oB4MxrHl2I4dJzDscCAeSZbWliInIWbGBURkXnYAEQHI
+    NHKXyGX2gUhMhnYgAJUidwCB6FKxFbFzNwknEH03sflQM0uISE33qNGV8BSUaF//Ua1Tt56n705J
+    9XJl+rkOKBVYfktaB7KXkd7nBFktUYgI4IvZUlaTIZcOFWd7TuVvpaB68aQmGozrLmTVzNbMudR2
+    HkNpST6wiJHrJqY4mLmDZe1PZY5bXE0mWnS913g6GGfmnm4ewXl9Foodwa3AiGBN9/5uj7jC6o+r
+    61NRv/ncHLfQEP74SA6kFPqqtipCy7bvXqSFdV1y1ZvbhAH50tNEYaijmY4ofGAJmmgR0X1V0Bhw
+    rsUGoXZ11mvADMuyFrS8qt9mWA7o/1FEi5y2s7xYYLlkRZ2pJNYvZiYSik8KZHf0YGbrEq/uleR0
+    xPnNwCuwbyrK96jjkV1HfK4B8o+ZPz+9KoPDezLsvHQXXQbegB+OSOTUgp66O5XK8zNOpzTFgphA
+    uFNfbywugha1GPN3sEabKyou7molaqUWFgA9shyzLycwCIVBkw/xjJvY76/UrNcNa+2KX1+uA+cd
+    fTgAwN9fVEfY6yPoGDbkProDlU6HoMdBhO32OjKbCerbrWjTNxcAbDYAMJ1eqRex2xVoPPLPvWN5
+    xmiV6d9fvLw0RkR5Ey2SzEM+Tjq7MRKibxrucxW3I5RfztZ/95wzo6Vb33m30rrbV3452/c2d7lw
+    Z4zn6yaS8lE6gCofWD2IroSxf6nUjhv6jum2ic5Px2pL9Q+TVYba1BF5qAAAAABJRU5ErkJggg==
+    " ></a>
+            </div>
+            <div class="msg form-group form-control rounded input-lg text-center no-border">{{ msg }}</div>
+            <button type="submit" class="btn btn-lg btn-warning lt b-white b-2x btn-block btn-rounded"><i class="icon-arrow-right pull-right"></i><span class="m-r-n-lg">登录</span></button>
+            <div class="text-center m-t m-b"><a href="{% static '#' %}"><small>忘记密码?</small></a></div>
+            <div class="line line-dashed"></div>
+            <p class="text-muted text-center"><small>还没有账号?</small></p>
+            <a href="{% url 'accounts:regist' %}" class="btn btn-lg btn-info btn-block rounded">创建账号</a>
         </form>
       </section>
     </div>
@@ -52,16 +73,58 @@
     </div>
   </footer>
   <!-- / footer -->
-  <script src="js/jquery.min.js"></script>
-  <!-- Bootstrap -->
-  <script src="js/bootstrap.js"></script>
-  <!-- App -->
-  <script src="js/app.js"></script>  
-  <script src="js/slimscroll/jquery.slimscroll.min.js"></script>
-    <script src="js/app.plugin.js"></script>
-  <script type="text/javascript" src="js/jPlayer/jquery.jplayer.min.js"></script>
-  <script type="text/javascript" src="js/jPlayer/add-on/jplayer.playlist.min.js"></script>
-  <script type="text/javascript" src="js/jPlayer/demo.js"></script>
+{#  <script src="js/jquery.min.js"></script>#}
+{#  <!-- Bootstrap -->#}
+{#  <script src="js/bootstrap.js"></script>#}
+{#  <!-- App -->#}
+{#  <script src="js/app.js"></script>  #}
+{#  <script src="js/slimscroll/jquery.slimscroll.min.js"></script>#}
+{#    <script src="js/app.plugin.js"></script>#}
+{#  <script type="text/javascript" src="js/jPlayer/jquery.jplayer.min.js"></script>#}
+{#  <script type="text/javascript" src="js/jPlayer/add-on/jplayer.playlist.min.js"></script>#}
+{#  <script type="text/javascript" src="js/jPlayer/demo.js"></script>#}
 <div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
+        <script>
+            get_captcha_img();
+            $("#captcha_img").click(get_captcha_img);
+            function get_captcha_img() {
+                $.ajax({
+                    url: '{% url 'apis:get_captcha' %}',
+                    type: 'GET',
+                    dataType: 'text',
+                    success: function (data) {
+                        $('#captcha_img').attr('src', data);
+                    }
+                });
+            }
+        </script>
+        <script>
+            // 这里在form中定义了，如果没定义可以用jquery添加事件
+            // $("#id_captcha").blur(check_captcha);
+
+            // 当失去焦点时检查验证码
+            function check_captcha() {
+                var captcha_code = $('#id_captcha').val();
+                if (captcha_code.length == 0){
+                    return false
+                }
+                $.ajax({
+                    url: '{% url 'apis:check_captcha' %}',
+                    type: 'GET',
+                    dataType: 'json',
+                    data: {"captcha_code": captcha_code},
+                    success: function (data) {
+                        if(data.code == 400){
+                             $('.msg').html("验证码错误");
+                        }else{
+                            $('.msg').html("");
+                        }
+                    }
+                });
+            };
+            function set_html() {
+                $('.msg').html("");
+            }
+        </script>
 </body>
 </html>

@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+{% block content %}
+    <div>
+        <div>
+            <div class="center">
+                <img src="{{ user.avator | thumbnail_url:'avatar115' }}">
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en" class="app">
-<head>  
+<head>
   <meta charset="utf-8" />
   <title>Musik | Web Application</title>
   <meta name="description" content="app, web app, responsive, admin dashboard, admin, flat, flat ui, ui kit, off screen nav" />
@@ -12,12 +12,15 @@
   <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" type="text/css" />
   <link rel="stylesheet" href="{% static 'css/simple-line-icons.css' %}" type="text/css" />
   <link rel="stylesheet" href="{% static 'css/font.css' %}" type="text/css" />
-  <link rel="stylesheet" href="{% static 'css/app.css' %}" type="text/css" />  
-    <!--[if lt IE 9]>
+  <link rel="stylesheet" href="{% static 'css/app.css' %}" type="text/css" />
     <script src="{% static 'js/ie/html5shiv.js' %}"></script>
     <script src="{% static 'js/ie/respond.min.js' %}"></script>
     <script src="{% static 'js/ie/excanvas.js' %}"></script>
-  <![endif]-->
+
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/gritter/css/jquery.gritter.css' %}" />
+    <script type="text/javascript" src="{% static 'assets/gritter/js/jquery.gritter.js' %}"></script>
+
 </head>
 <body class="bg-info dker">
   <section id="content" class="m-t-lg wrapper-md animated fadeInDown">
@@ -27,38 +30,35 @@
         <header class="wrapper text-center">
           <strong>来注册发现有趣的事情</strong>
         </header>
-        <form>
-          <div class="form-group">
-            <span>{{ form.username.label }}</span>
-            <span>{{ form.username.error_messages.0 }}</span>
-            <input name='username' placeholder="用户名" class="form-control rounded input-lg text-center no-border">
-          </div>
-          <div class="form-group">
-              <span>{{ form.phonenumber.label }}</span>
-              <input name='telnumber' type="tel" placeholder="电话号码" class="form-control rounded input-lg text-center no-border">
-          </div>
-          <div class="form-group">
-              <span>{{ form.password.label }}</span>
-              <input name='password' type="password" placeholder="输入密码" class="form-control rounded input-lg text-center no-border">
-          </div>
-          <div class="form-group">
-              <span>{{ form.password2.label }}</span>
-              <input name='password2' type="password" placeholder="确认密码" class="form-control rounded input-lg text-center no-border">
-          </div>
-          <div class="form-group">
-              <span>{{ form.checknumber.label }}</span>
-              <input name='checknumber' type="text" placeholder="验证码" class="form-control rounded input-lg text-center no-border">
-          </div>
-          <div class="checkbox i-checks m-b">
-            <label class="m-l">
-              <input type="checkbox" checked=""><i></i> Agree the <a href="{% static '#' %}">terms and policy</a>
-            </label>
-          </div>
-          <button type="" class="btn btn-lg btn-warning lt b-white b-2x btn-block btn-rounded"><span class="m-r-n-lg">获取短信验证码</span></button>
-          <button type="submit" class="btn btn-lg btn-warning lt b-white b-2x btn-block btn-rounded"><i class="icon-arrow-right pull-right"></i><span class="m-r-n-lg">注册</span></button>
+        <form id="regist_form">
+            {% csrf_token %}
+            <div class="form-group">
+{#            <input name='username' placeholder="用户名" class="form-control rounded input-lg text-center no-border">#}
+              {{ form.username }}
+            </div>
+            <div class="form-group">
+{#              <input name='password' type="password" placeholder="输入密码" class="form-control rounded input-lg text-center no-border">#}
+                {{form.password }}
+            </div>
+            <div class="form-group">
+{#              <input name='password2' type="password" placeholder="确认密码" class="form-control rounded input-lg text-center no-border">#}
+                {{ form.password2 }}
+            </div>
+            <div class="form-group">
+{#              <input name='telnumber' type="tel" placeholder="电话号码" class="form-control rounded input-lg text-center no-border">#}
+                {{ form.mobile }}
+            </div>
+            <div class="form-group">
+{#              <input name='checknumber' type="text" placeholder="验证码" class="form-control rounded input-lg text-center no-border">#}
+                {{ form.mobile_captcha }}
+            </div>
+            <div class="form-group">
+                <input onclick="sendmessage(this,60);" type="button" value="点击获取" class="form-control rounded input-lg text-center no-border" style="width:150px;position: absolute;margin-left: 180px;margin-top:-60px">
+            </div>
+          <button id="register_btn" type="button" class="btn btn-lg btn-warning lt b-white b-2x btn-block btn-rounded"><i class="icon-arrow-right pull-right"></i><span class="m-r-n-lg">注册</span></button>
           <div class="line line-dashed"></div>
           <p class="text-muted text-center"><small>已有账号?</small></p>
-          <a href="{% static 'signin.html' %}" class="btn btn-lg btn-info btn-block btn-rounded">登录</a>
+          <a href="{% url 'accounts:login' %}" class="btn btn-lg btn-info btn-block btn-rounded">登录</a>
         </form>
       </section>
     </div>
@@ -71,17 +71,101 @@
       </p>
     </div>
   </footer>
-  <!-- / footer -->
-  <script src="{% static 'js/jquery.min.js' %}"></script>
-  <!-- Bootstrap -->
   <script src="{% static 'js/bootstrap.js' %}"></script>
   <!-- App -->
-  <script src="{% static 'js/app.js' %}"></script>  
+  <script src="{% static 'js/app.js' %}"></script>
   <script src="{% static 'js/slimscroll/jquery.slimscroll.min.js' %}"></script>
     <script src="{% static 'js/app.plugin.js' %}"></script>
   <script type="text/javascript" src="{% static 'js/jPlayer/jquery.jplayer.min.js' %}"></script>
   <script type="text/javascript" src="{% static 'js/jPlayer/add-on/jplayer.playlist.min.js' %}"></script>
   <script type="text/javascript" src="{% static 'js/jPlayer/demo.js' %}"></script>
 <div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
+<script>
+        {# 发送短信验证码 #}
+        function sendmessage(obj,second){
+            var telRegex = /(13|14|15|17|18)\d{9}/;
+            if(telRegex.test($.trim($("#id_mobile").val()))){
+                $.ajax({
+                    url: "{% url 'apis:mobile_captcha' %}",
+                    type: "GET",
+                    dataType: "json",
+                    data: {"mobile": $("#id_mobile").val()},
+                    success: function (data) {
+                         $.gritter.add({
+                            title: '提交结果',
+                            text: data.msg
+                        });
+                    }
+                });
+                countDown(obj,second)
+            } else{
+                $.gritter.add({
+                    title: '提交结果',
+                    text: '手机号有误'
+                });
+            }
+        }
+
+        {# 重新发送倒计时 #}
+        function countDown(obj,second){
+        // 如果秒数还是大于0，则表示倒计时还没结束
+         if(second>=0){
+              // 获取默认按钮上的文字
+              if(typeof buttonDefaultValue === 'undefined' ){
+                buttonDefaultValue =  obj.defaultValue;
+            }
+            // 按钮置为不可点击状态
+            obj.disabled = true;
+            // 按钮里的内容呈现倒计时状态
+            obj.value = buttonDefaultValue+'('+second+')';
+            // 时间减一
+            second--;
+            // 一秒后重复执行
+            setTimeout(function(){countDown(obj,second);},1000);
+            // 否则，按钮重置为初始状态
+            }else{
+            // 按钮置未可点击状态
+            obj.disabled = false;
+            // 按钮里的内容恢复初始状态
+            obj.value = buttonDefaultValue;
+           }
+        }
+</script>
+<script>
+    $("#register_btn").click(function () {
+          // some_check
+          $.ajax({
+              url: "{% url 'accounts:regist' %}",
+              type: "POST",
+              dataType: "json",
+              data: $("#regist_form").serialize(), // {"username":'cali'}
+              success: function (data) {
+                  if(data.status == 200 ){
+                      window.location.href='{% url 'repo:index' %}';
+                  }else{
+                      msg = "新错误类型";
+                      if(data.status == 400 || data.status == 401){
+                          msg = data.msg
+                      }else{
+                          // 402 => form.errors
+                          for(var i in data.msg){
+                              msg = i+data.msg[i];
+                              break}
+                          {#msg = data.msg#}
+                      }
+                       $.gritter.add({
+                          title: '提交结果',
+                          text: msg
+                      });
+                   }
+              },
+              // 解决csrftoken
+              beforeSend: function(xhr, settings) {
+                  xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");}
+          });
+      });
+</script>
 </body>
 </html>
+
+
