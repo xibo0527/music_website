@@ -19,6 +19,33 @@
             })
         })
     </script>
+    <script>
+        $('#player').click(function () {
+            var tempForm = document.createElement("form");
+            tempForm.id = "tempForm1";
+            tempForm.method = "post";
+            tempForm.action = "{% url 'repo:playerlist' %}";
+            tempForm.target = "_blank";
+            var hideInput1 = document.createElement("input");
+            hideInput1.type = "hidden";
+            hideInput1.name='mid';
+            hideInput1.value = '{{ singer.singer_mid }}';
+            tempForm.appendChild(hideInput1);
+            if(document.all){
+                tempForm.attachEvent("onsubmit",function(){}); 
+            }else{
+                var subObj = tempForm.addEventListener("submit",function(){},false);
+            }
+            document.body.appendChild(tempForm);
+            if(document.all){
+                tempForm.fireEvent("onsubmit");
+            }else{
+                tempForm.dispatchEvent(new Event("submit"));
+            }
+            tempForm.submit();
+            document.body.removeChild(tempForm);
+        })
+    </script>
 {% endblock %}
 {% block content %}
 <section class="vbox" id="bjax-el">
@@ -33,7 +60,7 @@
                       <div class="col-sm-7">
                         <h2 class="m-t-none text-black">{{ singer.name }}</h2>
                         <div class="m-b-lg">
-                          <a href="#" class="btn btn-success">播放歌手歌曲</a> <button class="btn btn-default" id="collectsinger">{% if status %}<i class="glyphicon glyphicon-heart" style="color:rgb(219,88,96);" id="changestatus"></i>{% else %}<i class="glyphicon glyphicon-heart-empty" id="changestatus"></i>{% endif %}关注{{ fans }}万</button>
+                          <a href="javascript:void(0)" id="player" class="btn btn-success">播放歌手歌曲</a> <button class="btn btn-default" id="collectsinger">{% if status %}<i class="glyphicon glyphicon-heart" style="color:rgb(219,88,96);" id="changestatus"></i>{% else %}<i class="glyphicon glyphicon-heart-empty" id="changestatus"></i>{% endif %}关注{{ fans }}万</button>
                         </div>
                         <div>
                           标签: <a href="{% url 'repo:allsinger' %}?category={{ singer.category.id }}" class="badge bg-light">{{ singer.category }}</a>
@@ -49,14 +76,9 @@
                             <a href="javascript:void(0)" class="m-r-sm"><i class="icon-cloud-download"></i></a>
                             <a href="#" class="m-r-sm"><i class="icon-plus"></i></a>
                         </div>
-{#                        <a href="#" class="jp-play-me m-r-sm pull-left">#}
-{#                          <i class="icon-control-play text"></i>#}
-{#                          <i class="icon-control-pause text-active"></i>#}
-{#                        </a>#}
                           <span class="pull-left">{{ forloop.counter }}&nbsp&nbsp&nbsp&nbsp&nbsp</span>
                         <div class="clear text-ellipsis">
                           <a href="{% url 'detail:song' item.id %}"><span>{{ item.name }}</span></a>
-{#                          <span class="text-muted"> -- 04:35</span>#}
                         </div>
                       </li>
                         {% endfor %}
