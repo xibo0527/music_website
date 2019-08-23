@@ -55,6 +55,7 @@ class MusicInfo(models.Model):
     class Meta:
         verbose_name = '音乐库'
         verbose_name_plural = verbose_name
+        ordering = ['-fans']
 
     def __str__(self):
         return self.name
@@ -69,6 +70,7 @@ class SingerCollection(models.Model):
     class Meta:
         verbose_name = "歌手收藏表"
         verbose_name_plural = verbose_name
+
 
     def __str__(self):
         if self.status: ret="收藏"
@@ -127,6 +129,7 @@ class MusicListInfo(models.Model):
     class Meta:
         verbose_name = '歌单表'
         verbose_name_plural =verbose_name
+        ordering = ['-fans']
 
     def __str__(self):
         return self.name
