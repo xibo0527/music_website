@@ -40,7 +40,7 @@
                 {{ form.captcha }}
             </div>
             <div class="form-group" style="position: absolute;margin-top: -50px;margin-left:200px">
-            <a href="javascript:void(0);"><img id="captcha_img" src="data:image/jpg;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAAeCAIAAABoq03CAAACcUlEQVR4nO1aQXLCMAxcMX1A4cwM
+            <a href="javascript:void(0)"><img id="captcha_img" src="data:image/jpg;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAAeCAIAAABoq03CAAACcUlEQVR4nO1aQXLCMAxcMX1A4cwM
     Fz7QQzu8hA8wPKIz/QB/gFM/U9pLf1J+oB4MxrHl2I4dJzDscCAeSZbWliInIWbGBURkXnYAEQHI
     NHKXyGX2gUhMhnYgAJUidwCB6FKxFbFzNwknEH03sflQM0uISE33qNGV8BSUaF//Ua1Tt56n705J
     9XJl+rkOKBVYfktaB7KXkd7nBFktUYgI4IvZUlaTIZcOFWd7TuVvpaB68aQmGozrLmTVzNbMudR2
@@ -56,7 +56,7 @@
             </div>
             <div class="msg form-group form-control rounded input-lg text-center no-border">{{ msg }}</div>
             <button type="submit" class="btn btn-lg btn-warning lt b-white b-2x btn-block btn-rounded"><i class="icon-arrow-right pull-right"></i><span class="m-r-n-lg">登录</span></button>
-            <div class="text-center m-t m-b"><a href="{% static '#' %}"><small>忘记密码?</small></a></div>
+            <div class="text-center m-t m-b"><a href="javascript:void(0)"><small>忘记密码?</small></a></div>
             <div class="line line-dashed"></div>
             <p class="text-muted text-center"><small>还没有账号?</small></p>
             <a href="{% url 'accounts:regist' %}" class="btn btn-lg btn-info btn-block rounded">创建账号</a>
@@ -64,7 +64,6 @@
       </section>
     </div>
   </section>
-  <!-- footer -->
   <footer id="footer">
     <div class="text-center padder">
       <p>
@@ -87,10 +86,6 @@
             }
         </script>
         <script>
-            // 这里在form中定义了，如果没定义可以用jquery添加事件
-            // $("#id_captcha").blur(check_captcha);
-
-            // 当失去焦点时检查验证码
             function check_captcha() {
                 var captcha_code = $('#id_captcha').val();
                 if (captcha_code.length == 0){
@@ -109,7 +104,7 @@
                         }
                     }
                 });
-            };
+            }
             function set_html() {
                 $('.msg').html("");
             }

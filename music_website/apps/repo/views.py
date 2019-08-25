@@ -3,6 +3,8 @@ from django.views.generic import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from.models import Singer,MusicInfo
 from django.core.paginator import Paginator
+from django.http import JsonResponse
+from django.forms.models import model_to_dict
 
 # Create your views here.
 class Index(LoginRequiredMixin,View):
@@ -32,12 +34,15 @@ class AllSinger(LoginRequiredMixin,View):
         }
         return render(request,'allsinger.html',kwgs)
 
+<<<<<<< HEAD
 from .forms import CommentsForm
 class Test(View):
     def get(self,request):
         form = CommentsForm()
         return render(request,'test.html',{'form':form})
 
+=======
+>>>>>>> 9f7fb4617bdfaf93f49a3a2de2459c2be637ff45
 class Player(View):
     def post(self,request):
         try:
@@ -66,4 +71,8 @@ class Playerlist(View):
             kwgs = {
                 'code':400
             }
+<<<<<<< HEAD
         return render(request,'playerlist.html',kwgs)
+=======
+        return render(request,'player1.html',kwgs)
+>>>>>>> 9f7fb4617bdfaf93f49a3a2de2459c2be637ff45
