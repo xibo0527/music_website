@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import View
-from apps.repo.models import Singer,MusicInfo,SingerCollection,SongCollection,SongComments,SongCommentsDianZan
+from apps.repo.models import Singer,MusicInfo,SingerCollection,SongCollection,SongComments,SongCommentsDianZan,MusicListInfo
 from django.core.paginator import Paginator
 from apps.repo.forms import CommentsForm
 from django.http import JsonResponse
@@ -17,11 +17,13 @@ class SingerDetail(View):
         # fans = singer.singer_collection_set.filter(status=True).count()
         fans = singer.fans
         status = SingerCollection.objects.filter(user=request.user,status=True,singer=singer)
+        songlist = MusicListInfo.objects.filter(user=request.user)
         kwgs = {
             'singer':singer,
             'music':music,
             'fans':fans,
             'status':status,
+            'songlist':songlist,
         }
         return render(request,'singer_detail.html',kwgs)
 

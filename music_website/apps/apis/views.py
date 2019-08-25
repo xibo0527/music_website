@@ -201,3 +201,16 @@ class SongListCollect(View):
             'code': 200, 'msg': msg, 'fans': fans
         }
         return JsonResponse(ret)
+
+class ToSongList(View):
+    def post(self,request,id):
+        songlistid = request.POST.get('songlistid')
+        song = MusicInfo.objects.filter(id=id)
+        songlist = MusicListInfo.objects.get(id=songlistid)
+        songs = MusicInfo.objects.filter(musiclistinfo=songlist)
+        songlist.song = song | songs
+        songlist.save()
+        ret = {
+            'code':200
+        }
+        return JsonResponse(ret)

@@ -1,11 +1,34 @@
-{% extends 'base.html' %}
-{% load thumbnail %}
-{% block content %}
-    <div>
-        <div>
-            <div class="center">
-                <img src="{{ user.avator | thumbnail_url:'avatar115' }}">
-            </div>
-        </div>
+{% extends 'mymusic_base.html' %}
+{% block mymusiccontent %}
+    <div style="position: relative;left: 27px;top:50px">
+        <p><button class="btn btn-success"><i class="glyphicon glyphicon-play"></i>播放全部</button></p>
+            <ul class="list-group list-group-lg col-lg-3">
+                    {% for item in mymusic %}
+                  <li class="list-group-item">
+                      <span class="pull-left">{{ forloop.counter }}&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+                    <div class="clear text-ellipsis">
+                      <a href="{% url 'detail:song' item.id %}"><span>{{ item.name }}</span></a>
+                    </div>
+                  </li>
+                    {% endfor %}
+                <ul class="pagination pagination">
+                    {% if mymusic.has_previous %}
+                        <li><a href="?page=1">第一页</a></li>
+                        <li><a href="?page={{ mymusic.previous_page_number }}"><i class="fa fa-chevron-left"></i></a></li>
+                    {% else %}
+                        <li><a href="javascript:void(0)" disabled="disabled">第一页</a></li>
+                        <li><a href="javascript:void(0)"><i class="fa fa-chevron-left"></i></a></li>
+                    {% endif %}
+                    {% if mymusic.has_next %}
+                        <li><a href="?page={{ mymusic.next_page_number }}"><i class="fa fa-chevron-right"></i></a></li>
+                        <li><a href="?page={{ mymusic.paginator.num_pages }}">最后一页</a></li>
+                    {% else %}
+                        <li><a href="javascript:void(0)"><i class="fa fa-chevron-right"></i></a></li>
+                        <li><a href="javascript:void(0)">最后一页</a></li>
+                    {% endif %}
+                </ul>
+            </ul>
+
     </div>
+
 {% endblock %}

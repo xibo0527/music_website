@@ -37,3 +37,33 @@ class Test(View):
     def get(self,request):
         form = CommentsForm()
         return render(request,'test.html',{'form':form})
+
+class Player(View):
+    def post(self,request):
+        try:
+            id = request.POST.get('id')
+            music = MusicInfo.objects.get(id=id)
+            kwgs = {
+                'music': music
+            }
+        except Exception as e:
+            kwgs = {
+                'music':False
+            }
+        return render(request,'player.html',kwgs)
+
+class Playerlist(View):
+    def post(self,request):
+        try:
+            mid = request.POST.get('mid')
+            music = MusicInfo.objects.filter(singer_id=mid)
+            musicf = music[0]
+            kwgs = {
+                'music':music,
+                'musicf':musicf
+            }
+        except Exception as e:
+            kwgs = {
+                'code':400
+            }
+        return render(request,'playerlist.html',kwgs)

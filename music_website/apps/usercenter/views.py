@@ -1,6 +1,8 @@
 from django.shortcuts import render
-from django.views.generic import View
+from django.views.generic import View,ListView
 from django.http import JsonResponse
+from apps.repo.models import MusicInfo,SongCollection,MusicListInfo,Singer
+from django.core.paginator import Paginator
 
 # Create your views here.
 class Profile(View):
@@ -40,4 +42,36 @@ class ChangePasswdView(View):
 
 class MyMusic(View):
     def get(self,request):
-        return render(request,'mymusic.html')
+        pagesize = 5
+        page_num = request.GET.get('page', 1)
+        mymusic = MusicInfo.objects.filter(song_collection_set__status=True, song_collection_set__user=request.user)
+        p = Paginator(mymusic, pagesize)
+        mymusic = p.page(page_num)
+        kwgs = {
+            'mymusic':mymusic
+        }
+        return render(request,'mymusic.html',kwgs)
+
+class MyMusicList(View):
+    def get(self,request):
+        pagesize = 5
+        page_num = request.GET.get('page', 1)
+        mymusiclist = MusicListInfo.objects.filter(user=request.user)
+        p = Paginator(mymusiclist, pagesize)
+        mymusiclist = p.page(page_num)
+        kwgs = {
+            'mymusiclist': mymusiclist
+        }
+        return render(request,'mymusiclist.html',kwgs)
+
+class MyFocus(View):
+    def get(self,request):
+        pagesize = 5
+        page_num = request.GET.get('page', 1)
+        singer = Singer.objects.filter(singer_collection_set__status=True,singer_collection_set__user=request.user)
+        p = Paginator(singer, pagesize)
+        singer = p.page(page_num)
+        kwgs = {
+            'singer': singer
+        }
+        return render(request, 'myfocus.html', kwgs)

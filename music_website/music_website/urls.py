@@ -21,9 +21,9 @@ from .settings import MEDIA_ROOT
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    # url(r'^test01/',include('apps.test01.urls',namespace='test01')),
-    url(r'^accounts/', include('apps.accounts.urls', namespace='accounts')),
     url(r'^', include('apps.repo.urls', namespace='repo')),
+    url(r'^accounts/', include('apps.accounts.urls', namespace='accounts')),
+
     url(r'^songlist/',include('apps.songlist.urls',namespace='songlist')),
     url(r'^detail/',include('apps.detail.urls',namespace='detail')),
     url(r'^apis/',include('apps.apis.urls',namespace='apis')),

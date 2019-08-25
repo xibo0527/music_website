@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+{% load static %}
+{% block load_css %}
+{% endblock %}
+{% block content %}
+    <div style="background-repeat: no-repeat;background-size: 100% 100%;background-image: url();width: 100%;height: 100%" >
+        <div >
+            <div style="text-align: center;">
+                <img style="border-radius: 50%" src="{{ user.avator | thumbnail_url:'avatar115' }}">
+                <p style="font-size: 30px;font-weight: 400;color: black">{{ user.username }}</p>
+            </div>
+            <div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav nav-pills">
+                        {% url 'usercenter:my_music' as my_mysic%}
+                        {% url 'usercenter:my_musiclist' as my_musiclist%}
+                        {% url 'usercenter:my_focus' as my_focus%}
+                        <li class="{% if current_url == my_mysic %}active{% endif %}"><a href="{% url 'usercenter:my_music' %}" class="" id="myfavorite" style="font-size: 16px;color: black">我喜欢</a></li>
+                        <li class="{% if current_url == my_musiclist %}active{% endif %}"><a href="{% url 'usercenter:my_musiclist' %}" class="" id="mysonglist" style="font-size: 16px;color: black">我的歌单</a></li>
+                        <li class="{% if current_url == my_focus %}active{% endif %}"><a href="{% url 'usercenter:my_focus' %}" class="" id="myfocus" style="font-size: 16px;color: black">我的关注</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                {% block mymusiccontent %}
+                    {% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

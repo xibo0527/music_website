@@ -80,6 +80,34 @@
             })
         }
     </script>
+    <script>
+        $('#player').click(function () {
+            var tempForm = document.createElement("form");
+            tempForm.id = "tempForm1";
+            tempForm.method = "post";
+            tempForm.action = '{% url 'repo:player' %}';
+            tempForm.target="_blank";
+            var hideInput1 = document.createElement("input");
+            hideInput1.type = "hidden";
+            hideInput1.name='id'; //后台要接受这个参数来取值
+            hideInput1.value = '{{ music.id }}'; //后台实际取到的值
+            tempForm.appendChild(hideInput1);
+            if(document.all){
+                tempForm.attachEvent("onsubmit",function(){});        //IE
+            }else{
+                var subObj = tempForm.addEventListener("submit",function(){},false);    //firefox
+            }
+            document.body.appendChild(tempForm);
+            if(document.all){
+                tempForm.fireEvent("onsubmit");
+            }else{
+                tempForm.dispatchEvent(new Event("submit"));
+            }
+            tempForm.submit();
+            document.body.removeChild(tempForm);
+        })
+
+    </script>
 {% endblock %}
 {% block content %}
 <section class="vbox" id="bjax-el">
@@ -94,7 +122,7 @@
                       <div class="col-sm-7">
                         <h2 class="m-t-none text-black">{{ music.name }}</h2>
                         <div class="m-b-lg">
-                            <a href="{% static '#' %}" class="btn btn-success">播放</a>
+                            <a href="javascript:void(0)" id="player" class="btn btn-success">播放</a>
                             <button class="btn btn-default" id="collectsong">{% if status %}<i class="glyphicon glyphicon-heart" style="color:rgb(219,88,96);" id="changestatus"></i>{% else %}<i class="glyphicon glyphicon-heart-empty"></i>{% endif %}收藏</button>
                             <a href="#comments" class="btn btn-default"><i class="glyphicon glyphicon-comment" style="color: pink"></i>评论({{ count }})</a>
                         </div>

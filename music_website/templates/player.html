@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" type="text/css" />
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+</head>
+<body style="background-image:url({% static 'imgs/back1.jpeg' %});background-size: 100%,100%">
+<div id="music">
+	<div id="container">
+        <div style="text-align: center">
+		    <h3 id="musicName">{{ music.name }}</h3>
+        </div>
+        <div style="text-align: center">
+		    <img src="{{ music.img }}" id="musicImg" style="border-radius: 50%">
+        </div>
+        <div style="text-align: center">
+		    <audio src="{{ music.url }}" controls id="audio"></audio>
+        </div>
+        <div style="text-align: center">
+            <div class="btn-group" >
+                    <button id="play" class="btn btn-success">播放</button>
+                    <button id="pause" class="btn btn-success">暂停</button>
+            </div>
+        </div>
+
+	</div>
+</div>
+<script>
+    // 播放
+play.onclick = function(){
+	if(audio.paused){
+		audio.play();
+	}
+};
+
+// 暂停
+pause.onclick = function(){
+	if(audio.played){
+		audio.pause();
+	}
+};
+</script>
+<script>
+    audio.play()
+</script>
+
+</body>
+</html>

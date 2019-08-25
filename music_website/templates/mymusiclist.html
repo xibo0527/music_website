@@ -1,0 +1,41 @@
+{% extends 'mymusic_base.html' %}
+{% load thumbnail %}
+{% block mymusiccontent %}
+    <div style="position: relative;top:50px">
+        {% for item in mymusiclist %}
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+              <div class="item">
+                <div class="pos-rlt">
+                  <div class="item-overlay opacity r r-2x bg-black">
+                    <div class="center text-center m-t-n">
+                      <a href="{% url 'songlist:songlistdetail' item.id%}"><i class="fa fa-play-circle i-2x"></i></a>
+                    </div>
+                  </div>
+                  <a href="{% url 'songlist:songlistdetail' item.id%}"><img src="{{ item.img |thumbnail_url:'songlist280' }}" alt="..." class="r r-2x img-full"></a>
+                </div>
+                <div class="padder-v">
+                  <a href="{% url 'songlist:songlistdetail' item.id%}" class="text-ellipsis">{{ item.name }}</a>
+                </div>
+              </div>
+            </div>
+        {% endfor %}
+            <div>
+                <ul class="pagination pagination">
+                    {% if mymusiclist.has_previous %}
+                        <li><a href="?page=1">第一页</a></li>
+                        <li><a href="?page={{ mymusiclist.previous_page_number }}"><i class="fa fa-chevron-left"></i></a></li>
+                    {% else %}
+                        <li><a href="javascript:void(0)" disabled="disabled">第一页</a></li>
+                        <li><a href="javascript:void(0)"><i class="fa fa-chevron-left"></i></a></li>
+                    {% endif %}
+                    {% if mymusiclist.has_next %}
+                        <li><a href="?page={{ mymusiclist.next_page_number }}"><i class="fa fa-chevron-right"></i></a></li>
+                        <li><a href="?page={{ mymusiclist.paginator.num_pages }}">最后一页</a></li>
+                    {% else %}
+                        <li><a href="javascript:void(0)"><i class="fa fa-chevron-right"></i></a></li>
+                        <li><a href="javascript:void(0)">最后一页</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>歌曲播放</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" type="text/css" />
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.15/css/jquery.dataTables.css">
+
+</head>
+<body style="background-image:url({% static 'imgs/back1.jpeg' %});background-size: 100%,100%">
+<div id="music">
+	<div id="container">
+        <div class="col-md-4">
+        <h3>歌曲列表</h3>
+{#            {% for item in music %}#}
+{#                <p>{{ item.name }}</p>#}
+{#            {% endfor %}#}
+            {% for item in music %}
+            <li class="list-group-item">
+                  <span class="pull-left">{{ forloop.counter }}&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+                <div class="clear text-ellipsis">
+                  <a href=""><span>{{ item.name }}</span></a>
+                </div>
+            </li>
+            {% endfor %}
+        </div>
+        <div class="col-md-8">
+            <div>
+                <h3 id="musicName">{{ musicf.name }}</h3>
+            </div>
+            <div>
+                <img src="{{ musicf.img }}" id="musicImg" style="border-radius: 50%">
+            </div>
+            <div>
+                <audio src="{{ musicf.url }}" controls id="audio"></audio>
+            </div>
+            <div>
+                <div class="btn-group" >
+                        <button id="play" class="btn btn-success">播放</button>
+                        <button id="pause" class="btn btn-success">暂停</button>
+                        <button id="prev" class="btn btn-success">上一首</button>
+                        <button id="next" class="btn btn-success">下一首</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+    // 播放
+play.onclick = function(){
+	if(audio.paused){
+		audio.play();
+	}
+};
+
+// 暂停
+pause.onclick = function(){
+	if(audio.played){
+		audio.pause();
+	}
+};
+// 自动切换下一首
+audio.addEventListener('ended',function(){
+	next.onclick();
+},false);
+var url = [];
+var img = [];
+var n = [];
+    {% for item in music %}
+        url.unshift('{{ item.url }}');
+        img.unshift('{{ item.img }}');
+        n.unshift('{{ item.name }}');
+    {% endfor %}
+        url.reverse();
+        img.reverse();
+        n.reverse();
+        var len = url.length;
+num = 0;
+
+prev.onclick = function(){
+	num = (num + len - 1) % len;
+	audio.src = url[num];
+	musicName.innerHTML = n[num];
+	musicImg.src = img[num];
+	audio.play();
+};
+
+// 下一首
+next.onclick = function(){
+	num = (num + 1) % len;
+	audio.src = url[num];
+	musicName.innerHTML = n[num];
+	musicImg.src = img[num];
+	audio.play();
+};
+</script>
+<script>
+    audio.play()
+</script>
+</body>
+</html>
